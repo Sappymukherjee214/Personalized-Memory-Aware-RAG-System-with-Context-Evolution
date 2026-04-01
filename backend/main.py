@@ -22,9 +22,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize engines with ultimate-level parameters
-memory_engine = UltimateMemoryEngine(stm_limit=5)
-rag_pipeline = UltimateRAGPipeline(memory_engine)
+# Initialize Elite Research Modules
+memory_engine = UltimateMemoryEngine()
+rag_pipeline = EliteRAGPipeline(memory_engine)
 data_loader = ResearchDataLoader()
 eval_engine = ResearchEvalEngine(rag_pipeline)
 stress_tester = LongContextStressTester(rag_pipeline)
