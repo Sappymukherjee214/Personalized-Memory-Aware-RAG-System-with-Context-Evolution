@@ -9,42 +9,53 @@
 
 ---
 
-## 🔬 1. Project Abstract
+## Project Abstract
+
 Traditional Retrieval-Augmented Generation (RAG) systems suffer from **Temporal Amnesia**—treating sequential user interactions as i.i.d. events. This project introduces **C-RAG**, a cognitively-inspired RAG architecture that implements **Disentangled Memory Tracks** (Episodic STM and Semantic LTM) to model **Longitudinal User Intent Trajectories**. By leveraging **Information Bottleneck Analysis (IBA)** for memory consolidation, the system optimizes for persona consistency and high-precision personalized retrieval.
 
 ---
 
-## 🏛️ 2. Research Architecture & Methodology
+## Research Architecture & Methodology
+
 The system mirrors biological cognitive processes, moving beyond simple vector-store retrieval into a **Meta-Cognitive Reflexive Loop**.
 
-### 2.1 The Dual-Track Memory Engine
+### The Dual-Track Memory Engine
 
 - **Episodic Short-Term Memory (STM):** A high-fidelity, chronological buffer for recent interactions.
 - **Semantic Long-Term Memory (LTM):** An "Ultimate Axiom" registry. When the STM buffer reaches critical capacity, the system performs **Distillation**, extracting high-salience knowledge units and purging noise via the **Information Bottleneck (IBA)** ratio.
 
 ---
 
-## 🖼️ 3. Technical Illustrations (Live Workspace Capture)
+## Technical Illustrations (Live Workspace Capture)
 
-### 3.1 Ultimate Research Dashboard
+### Ultimate Research Dashboard
+
 The **C-RAG Evolution Dashboard** featuring Vanguard Glass-CSS and real-time intent visualization.
+
 ![Ultimate Research Interface](assets/dashboard_full.png)
 
-### 3.2 Cognitive Memory Consolidation
+### Cognitive Memory Evolution
+
 Visualization of the **STM-to-LTM** transition (Episodic to Semantic) and **IBA Compression** Efficiency.
+
 ![Memory Evolution & Consolidation](assets/memory_evolution.png)
 
-### 3.3 Scientific Laboratory (AQE)
+### Scientific Laboratory (AQE)
+
 Real-time **NDCG** and **Hallucination Probability** reports from a 10-trajectory DailyDialog simulation.
+
 ![Scientific Evaluation Rigor](assets/benchmark_report.png)
 
-### 3.4 Autonomous Researcher Persona
+### Autonomous Researcher Persona
+
 Expertise discovery and identity export based on longitudinal interaction history.
+
 ![Semantic Identity Profiling](assets/persona_profile.png)
 
 ---
 
-## 📊 4. Dataset Integration
+## Dataset Integration
+
 The system is grounded in real-world conversational data to ensure empirical validity:
 
 1. **DailyDialog**: Used for modeling **Natural Intent Trajectories**.
@@ -52,7 +63,8 @@ The system is grounded in real-world conversational data to ensure empirical val
 
 ---
 
-## 🔥 5. Evaluation Methodology
+## Evaluation Methodology
+
 This project includes a dedicated **AQE (Automated Quantitative Evaluation)** Suite:
 
 | Metric | Scientific Importance | Description |
@@ -63,7 +75,8 @@ This project includes a dedicated **AQE (Automated Quantitative Evaluation)** Su
 
 ---
 
-## 🏁 6. How to Run
+## How to Run
+
 1. **Backend**: `python backend/main.py`.
 2. **Frontend**: Open `frontend/index.html`.
 3. **Simulation**: Click **"Run AQE Benchmark"** in the sidebar.
