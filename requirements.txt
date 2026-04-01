@@ -4,3 +4,5 @@ numpy
 pydantic
 kagglehub
 pandas
+python-multipart
+python-dotenv
