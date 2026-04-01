@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CogniMemory | Research Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <!-- Sidebar: Context Visualizer -->
+    <aside class="sidebar">
+      <h2>COGNIMEMORY v0.1</h2>
+      
+      <div class="memory-section">
+        <div class="section-title">
+          Ultimate Research State
+          <span class="badge" id="evo-badge">Stable</span>
+        </div>
+        <div class="viz-panel" id="viz-panel">
+          <div class="viz-blob"></div>
+        </div>
+        <div id="metrics-panel">
+          <div class="metric-row"><span>Consolidation (IBA):</span> <span id="m-iba">0%</span></div>
+          <div class="metric-row"><span>AMW Efficiency:</span> <span id="m-amw">0.5</span></div>
+          <div class="metric-row"><span>Profile Expertise:</span> <span id="m-expert" class="expertise-highlight">Finding...</span></div>
+        </div>
+      </div>
+
+      <div class="memory-section">
+        <div class="section-title">
+          Episodic Memory (STM)
+          <span class="badge" id="stm-count">0/5</span>
+        </div>
+        <div class="memory-list" id="stm-list">
+          <!-- STM items injected here -->
+        </div>
+      </div>
+
+      <div class="memory-section lab-section">
+        <div class="section-title">Research Lab (Final Phase)</div>
+        <div class="lab-btn-group">
+          <button id="run-bench-btn" class="lab-btn btn-success">Run AQE Benchmark</button>
+          <button id="run-profile-btn" class="lab-btn btn-primary">Export Researcher Profile</button>
+          <button id="run-stress-btn" class="lab-btn btn-purple">Execute Stress Test</button>
+        </div>
+        <div id="lab-results">
+          <!-- Lab results show here -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="chat-container">
+      <div class="chat-history" id="chat-history">
+        <!-- Initial system message -->
+        <div class="message bot">
+          <div class="bubble">
+            Hello researcher. I am an evolving, memory-aware RAG system. How can we advance our research today?
+          </div>
+          <div class="metadata-footer">
+            <span>System: Initialization Complete</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-area">
+        <input type="text" id="query-input" placeholder="Enter research query..." autocomplete="off">
+        <button id="send-btn">Process Query</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:8000';
+    const chatHistory = document.getElementById('chat-history');
+    const queryInput = document.getElementById('query-input');
+    const sendBtn = document.getElementById('send-btn');
+    const stmList = document.getElementById('stm-list');
+    const ltmList = document.getElementById('ltm-list');
+    const stmCount = document.getElementById('stm-count');
+    const ltmCount = document.getElementById('ltm-count');
+    const evoBadge = document.getElementById('evo-badge');
+
+    async function updateMemoryState() {
+      try {
+        const response = await fetch(`${API_URL}/memory/state`);
+        const data = await response.json();
+        
+        // Update STM list
+        stmList.innerHTML = '';
+        data.stm.reverse().forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'memory-card stm';
+          div.textContent = item.content;
+          stmList.appendChild(div);
+        });
+        stmCount.textContent = `${data.stm.length}/5`;
+
+        // Update Semantic list
+        ltmList.innerHTML = '';
+        data.ltm.reverse().forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'memory-card ltm';
+          div.textContent = item.content;
+          ltmList.appendChild(div);
+        });
+        ltmCount.textContent = data.ltm.length;
+
+        // Update Ultimate Metrics
+        if (data.ultimate_metrics) {
+          document.getElementById('m-iba').textContent = Math.round(data.ultimate_metrics.compression_efficiency_iba * 100) + '%';
+          document.getElementById('m-amw').textContent = data.ultimate_metrics.rei_avg.toFixed(2);
+          
+          if (data.ultimate_metrics.compression_efficiency_iba > 0.5) {
+             evoBadge.textContent = 'Optimized';
+             evoBadge.style.color = '#3fb950';
+          }
+        }
+      } catch (err) {
+        console.error('Failed to update memory state', err);
+      }
+    }
+
+    async function sendQuery() {
+      const query = queryInput.value.trim();
+      if (!query) return;
+
+      // Log user message
+      addMessage(query, 'user');
+      queryInput.value = '';
+      sendBtn.disabled = true;
+
+      try {
+        const res = await fetch(`${API_URL}/query`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query })
+        });
+        const data = await res.json();
+        
+        addMessage(data.response, 'bot', data);
+        updateMemoryState();
+      } catch (err) {
+        addMessage('Error: Connection to research engine failed.', 'bot');
+      } finally {
+        sendBtn.disabled = false;
+      }
+    }
+
+    function addMessage(text, type, metadata = null) {
+      const div = document.createElement('div');
+      div.className = `message ${type}`;
+      
+      let html = `<div class="bubble">${text}</div>`;
+      if (metadata) {
+        let confidenceHtml = '';
+        if (metadata.diagnostics) {
+          const rei = metadata.diagnostics.rei_score * 100;
+          const color = rei > 75 ? '#3fb950' : '#d29922';
+          confidenceHtml = `<span style="color:${color}; font-weight:bold;">REI Accuracy: ${Math.round(rei)}%</span>`;
+        }
+        
+        html += `
+          <div class="metadata-footer">
+            ${confidenceHtml}
+          </div>
+        `;
+      } else {
+         html += `<div class="metadata-footer"><span>Just now</span></div>`;
+      }
+      
+      div.innerHTML = html;
+      chatHistory.appendChild(div);
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+
+    const labResults = document.getElementById('lab-results');
+    const runBenchBtn = document.getElementById('run-bench-btn');
+    const runStressBtn = document.getElementById('run-stress-btn');
+
+    async function runBenchmark() {
+      runBenchBtn.disabled = true;
+      try {
+        const res = await fetch(`${API_URL}/research/benchmark`);
+        const data = await res.json();
+        labResults.style.display = 'block';
+        labResults.innerHTML = `
+          <strong>Scientific Report:</strong><br>
+          Avg NDCG: ${data.report.avg_ndcg}<br>
+          Hallucination Prob: ${Math.round(data.report.hallucination_probability * 100)}%
+        `;
+        updateMemoryState();
+      } finally { runBenchBtn.disabled = false; }
+    }
+
+    async function runStressTest() {
+      runStressBtn.disabled = true;
+      try {
+        const res = await fetch(`${API_URL}/research/stress-test?turns=15`);
+        const data = await res.json();
+        labResults.style.display = 'block';
+        labResults.innerHTML = `
+          <strong>Stress Test Complete:</strong><br>
+          Processed ${data.stress_test_results.total_turns} turns.<br>
+          Consolidated ${data.stress_test_results.consolidation_events_count} memory sets.
+        `;
+        updateMemoryState();
+      } finally { runStressBtn.disabled = false; }
+    }
+
+    async function exportProfile() {
+      const btn = document.getElementById('run-profile-btn');
+      btn.disabled = true;
+      try {
+        const res = await fetch(`${API_URL}/research/profile`);
+        const data = await res.json();
+        document.getElementById('m-expert').textContent = data.primary_expertise;
+        labResults.style.display = 'block';
+        labResults.innerHTML = `
+          <strong>Researcher Profile Exported:</strong><br>
+          Expertise: ${data.primary_expertise}<br>
+          Knowledge Depth: ${data.knowledge_depth}<br>
+          Research Style: ${data.research_style}
+        `;
+      } finally { btn.disabled = false; }
+    }
+
+    runBenchBtn.addEventListener('click', runBenchmark);
+    runStressBtn.addEventListener('click', runStressTest);
+    document.getElementById('run-profile-btn').addEventListener('click', exportProfile);
+    sendBtn.addEventListener('click', sendQuery);
+    queryInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendQuery();
+    });
+
+    // Run initial state update
+    updateMemoryState();
+  </script>
+</body>
+</html>
