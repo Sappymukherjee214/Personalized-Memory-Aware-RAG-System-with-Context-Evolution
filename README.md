@@ -1,11 +1,10 @@
 # Personalized Memory-Aware RAG with Cognitive Context Evolution (C-RAG)
-
-### *A Tier-1+ Research-Grade Framework for Longitudinal Intent Trajectory Modeling*
+## *A Tier-1+ Research-Grade Framework for Longitudinal Intent Trajectory Modeling*
 
 [![Python](https://img.shields.io/badge/Backend-FastAPI-green)](https://fastapi.tiangolo.com)
-[![Frontend](https://img.shields.io/badge/Interface-Glassmorphism-blue)](#)
-[![Datasets](https://img.shields.io/badge/Benchmarking-Kaggle-orange)](#)
-[![Metrics](https://img.shields.io/badge/Evaluation-NDCG%20%7C%20REI-red)](#)
+[![Frontend](https://img.shields.io/badge/Interface-Glassmorphism-blue)](https://github.com/Sappymukherjee214/Personalized-Memory-Aware-RAG-System-with-Context-Evolution)
+[![Datasets](https://img.shields.io/badge/Benchmarking-Kaggle-orange)](#dataset-integration)
+[![Metrics](https://img.shields.io/badge/Evaluation-NDCG--REI-red)](#evaluation-methodology)
 
 ---
 
@@ -22,13 +21,6 @@ The system mirrors biological cognitive processes, moving beyond simple vector-s
 - **Episodic Short-Term Memory (STM):** A high-fidelity, chronological buffer for recent interactions.
 - **Semantic Long-Term Memory (LTM):** An "Ultimate Axiom" registry. When the STM buffer reaches critical capacity, the system performs **Distillation**, extracting high-salience knowledge units and purging noise via the **Information Bottleneck (IBA)** ratio.
 
-### 2.2 Mathematical Foundations
-
-To prevent **Semantic Drift** and **Adversarial Noise**, the system calculates:
-
-- **Research Efficiency Index (REI):** Measures the alignment between internal memory confidence and external factual grounding.
-- **Compression Efficiency (IBA Ratio):** Measures the informational weight of consolidated axioms vs. raw interaction tokens.
-
 ---
 
 ## 🖼️ 3. Technical Illustrations (Live Workspace Capture)
@@ -37,7 +29,7 @@ To prevent **Semantic Drift** and **Adversarial Noise**, the system calculates:
 The **C-RAG Evolution Dashboard** featuring Vanguard Glass-CSS and real-time intent visualization.
 ![Ultimate Research Interface](assets/dashboard_full.png)
 
-### 3.2 Cognitive Memory Evolution
+### 3.2 Cognitive Memory Consolidation
 Visualization of the **STM-to-LTM** transition (Episodic to Semantic) and **IBA Compression** Efficiency.
 ![Memory Evolution & Consolidation](assets/memory_evolution.png)
 
@@ -51,7 +43,8 @@ Expertise discovery and identity export based on longitudinal interaction histor
 
 ---
 
-## 📊 4. Dataset Integration & Motivation
+## 📊 4. Dataset Integration
+<a name="dataset-integration"></a>
 The system is grounded in real-world conversational data to ensure empirical validity:
 
 1. **DailyDialog**: Used for modeling **Natural Intent Trajectories**.
@@ -60,6 +53,7 @@ The system is grounded in real-world conversational data to ensure empirical val
 ---
 
 ## 🔥 5. Evaluation Methodology
+<a name="evaluation-methodology"></a>
 This project includes a dedicated **AQE (Automated Quantitative Evaluation)** Suite:
 
 | Metric | Scientific Importance | Description |
