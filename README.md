@@ -125,13 +125,20 @@ Implementing a privacy-preserved **Federated Memory Layer** where multiple C-RAG
 
 ---
 
-## License & Professional Contact
+## R&D Ecosystem & Institutional Integration
 
-This project is released under the **MIT License**. It is designed for researchers at **IITs, NITs, IISERs, and global R&D institutions.**
+This framework is strategically architected for **Reproducible Research (R2)** and stands as a baseline for longitudinal memory studies. It is currently optimized for collaborative integration within:
 
-**Author**: Sappymukherjee214
+- **Premier CFTIs**: IITs, NITs, IISERs, and IISc R&D labs.
+- **MNC Research Divisions**: Pioneering agentic memory architectures (OpenAI, Google DeepMind, Meta FAIR).
 
-**Research Focus**: Agentic Memory Architectures and Cognitive Context Evolution.
+### Technical Contribution & Peer Review
+
+The **C-RAG** protocol establishes a novel benchmark for **Cognitive Context Evolution.** We invite researchers and institutional stakeholders to audit the **AMW (Adaptive Memory Weighting)** algorithms and contribute to the evolution of decentralized persistent memory layers.
+
+**Primary Investigator**: Sappymukherjee214
+
+**Research Trajectory**: Agentic Cognitive Architectures | Information Bottleneck Distillation
 
 ---
 
