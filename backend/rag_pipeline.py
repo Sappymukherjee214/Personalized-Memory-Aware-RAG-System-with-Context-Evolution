@@ -2,7 +2,7 @@ import time
 from typing import List, Dict, Any
 import numpy as np
 
-class UltimateRAGPipeline:
+class EliteRAGPipeline:
     def __init__(self, memory_engine: Any):
         self.memory_engine = memory_engine
 
