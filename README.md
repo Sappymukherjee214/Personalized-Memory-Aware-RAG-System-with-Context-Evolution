@@ -1,4 +1,5 @@
 # Personalized Memory-Aware RAG with Cognitive Context Evolution (C-RAG)
+
 ## *A Tier-1+ Research-Grade Framework for Longitudinal Intent Trajectory Modeling*
 
 [![Python](https://img.shields.io/badge/Backend-FastAPI-green)](https://fastapi.tiangolo.com)
@@ -44,7 +45,6 @@ Expertise discovery and identity export based on longitudinal interaction histor
 ---
 
 ## 📊 4. Dataset Integration
-<a name="dataset-integration"></a>
 The system is grounded in real-world conversational data to ensure empirical validity:
 
 1. **DailyDialog**: Used for modeling **Natural Intent Trajectories**.
@@ -53,7 +53,6 @@ The system is grounded in real-world conversational data to ensure empirical val
 ---
 
 ## 🔥 5. Evaluation Methodology
-<a name="evaluation-methodology"></a>
 This project includes a dedicated **AQE (Automated Quantitative Evaluation)** Suite:
 
 | Metric | Scientific Importance | Description |
