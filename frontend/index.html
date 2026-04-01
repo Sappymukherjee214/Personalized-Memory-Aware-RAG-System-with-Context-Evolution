@@ -82,6 +82,19 @@
         <button id="send-btn">Process Query</button>
       </div>
     </main>
+
+    <!-- Connectivity Modal: Only shows when offline -->
+    <div id="conn-modal" class="modal-overlay">
+      <div class="modal-content">
+        <h3>Connect Research Engine</h3>
+        <p>Your research portal is currently offline. Please provide your live Render Backend URL:</p>
+        <input type="text" id="modal-url-input" placeholder="https://your-app.onrender.com" autocomplete="off">
+        <div class="modal-buttons">
+           <button id="save-url-btn" class="lab-btn btn-success">Update Connectivity</button>
+           <button id="retry-btn" class="lab-btn btn-primary">Retry Baseline</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -109,11 +122,20 @@
     const stmCount = document.getElementById('stm-count');
     const ltmCount = document.getElementById('ltm-count');
     const evoBadge = document.getElementById('evo-badge');
+    console.log(`Research Engine connecting to: ${API_BASE}`);
+
+    const connModal = document.getElementById('conn-modal');
+    const modalUrlInput = document.getElementById('modal-url-input');
+    const saveUrlBtn = document.getElementById('save-url-btn');
+    const retryBtn = document.getElementById('retry-btn');
 
     async function updateMemoryState() {
         try {
             const response = await fetch(`${API_BASE}/memory/state`);
-            if (!response.ok) throw new Error('System Offline');
+            if (!response.ok) throw new Error('Offline');
+            
+            // Success! Hide modal if it's there
+            connModal.style.display = 'none';
             const data = await response.json();
         
         // Update STM list
@@ -148,8 +170,25 @@
         }
       } catch (err) {
         console.error('Failed to update memory state', err);
+        // Show connectivity modal on absolute failure
+        if (!isLocal) {
+            connModal.style.display = 'flex';
+        }
       }
     }
+
+    saveUrlBtn.addEventListener('click', () => {
+        const val = modalUrlInput.value.trim();
+        if (val) {
+            localStorage.setItem('ELITE_RAG_API_URL', val);
+            window.location.reload();
+        }
+    });
+
+    retryBtn.addEventListener('click', () => {
+        localStorage.removeItem('ELITE_RAG_API_URL');
+        window.location.reload();
+    });
 
     async function sendQuery() {
       const query = queryInput.value.trim();
