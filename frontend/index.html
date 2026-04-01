@@ -40,6 +40,16 @@
         </div>
       </div>
 
+      <div class="memory-section">
+        <div class="section-title">
+          Semantic Knowledge (LTM)
+          <span class="badge" id="ltm-count">0</span>
+        </div>
+        <div class="memory-list" id="ltm-list">
+          <!-- LTM axioms injected here -->
+        </div>
+      </div>
+
       <div class="memory-section lab-section">
         <div class="section-title">Research Lab (Final Phase)</div>
         <div class="lab-btn-group">
@@ -75,7 +85,15 @@
   </div>
 
   <script>
-    const API_URL = 'http://localhost:8000';
+    // Dynamic API Discovery & Deployment Configuration
+    const PRODUCTION_API_URL = "https://your-render-app-name.onrender.com"; // 👈 REPLACE THIS with your Render URL after deployment
+    
+    const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        ? (window.location.port ? `${window.location.protocol}//${window.location.hostname}:${window.location.port}` : 'http://localhost:8000')
+        : PRODUCTION_API_URL;
+    
+    console.log(`Research Engine connecting to: ${API_BASE}`);
+
     const chatHistory = document.getElementById('chat-history');
     const queryInput = document.getElementById('query-input');
     const sendBtn = document.getElementById('send-btn');
@@ -86,9 +104,10 @@
     const evoBadge = document.getElementById('evo-badge');
 
     async function updateMemoryState() {
-      try {
-        const response = await fetch(`${API_URL}/memory/state`);
-        const data = await response.json();
+        try {
+            const response = await fetch(`${API_BASE}/memory/state`);
+            if (!response.ok) throw new Error('System Offline');
+            const data = await response.json();
         
         // Update STM list
         stmList.innerHTML = '';
@@ -135,7 +154,7 @@
       sendBtn.disabled = true;
 
       try {
-        const res = await fetch(`${API_URL}/query`, {
+        const res = await fetch(`${API_BASE}/query`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ query })
@@ -185,7 +204,7 @@
     async function runBenchmark() {
       runBenchBtn.disabled = true;
       try {
-        const res = await fetch(`${API_URL}/research/benchmark`);
+        const res = await fetch(`${API_BASE}/research/benchmark`);
         const data = await res.json();
         labResults.style.display = 'block';
         labResults.innerHTML = `
@@ -200,7 +219,7 @@
     async function runStressTest() {
       runStressBtn.disabled = true;
       try {
-        const res = await fetch(`${API_URL}/research/stress-test?turns=15`);
+        const res = await fetch(`${API_BASE}/research/stress-test?turns=15`);
         const data = await res.json();
         labResults.style.display = 'block';
         labResults.innerHTML = `
@@ -216,7 +235,7 @@
       const btn = document.getElementById('run-profile-btn');
       btn.disabled = true;
       try {
-        const res = await fetch(`${API_URL}/research/profile`);
+        const res = await fetch(`${API_BASE}/research/profile`);
         const data = await res.json();
         document.getElementById('m-expert').textContent = data.primary_expertise;
         labResults.style.display = 'block';
