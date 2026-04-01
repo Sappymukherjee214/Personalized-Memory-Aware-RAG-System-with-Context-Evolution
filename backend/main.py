@@ -4,11 +4,11 @@ from fastapi.staticfiles import StaticFiles
 import os
 from typing import List, Dict, Any, Optional
 import pydantic
-from memory_engine import UltimateMemoryEngine
-from rag_pipeline import UltimateRAGPipeline
-from data_loader import ResearchDataLoader
-from eval_engine import ResearchEvalEngine
-from stress_tester import LongContextStressTester
+from backend.memory_engine import UltimateMemoryEngine
+from backend.rag_pipeline import EliteRAGPipeline
+from backend.data_loader import ResearchDataLoader
+from backend.eval_engine import ResearchEvalEngine
+from backend.stress_tester import LongContextStressTester
 import traceback
 
 app = FastAPI(title="Ultimate Personalized Memory-Aware RAG API")
