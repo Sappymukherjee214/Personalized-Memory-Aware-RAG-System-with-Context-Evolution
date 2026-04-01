@@ -1,5 +1,7 @@
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+import os
 from typing import List, Dict, Any, Optional
 import pydantic
 from memory_engine import UltimateMemoryEngine
@@ -26,6 +28,9 @@ rag_pipeline = UltimateRAGPipeline(memory_engine)
 data_loader = ResearchDataLoader()
 eval_engine = ResearchEvalEngine(rag_pipeline)
 stress_tester = LongContextStressTester(rag_pipeline)
+
+# Mount Frontend
+app.mount("/view", StaticFiles(directory="frontend", html=True), name="static")
 
 class QueryRequest(pydantic.BaseModel):
     query: str
@@ -92,4 +97,5 @@ def run_stress_test(turns: int = 20):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
