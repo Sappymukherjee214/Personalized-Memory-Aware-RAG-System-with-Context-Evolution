@@ -1,53 +1,75 @@
-# Personalized Memory-Aware RAG with Context Evolution
+# Personalized Memory-Aware RAG with Cognitive Context Evolution (C-RAG)
+### *A Tier-1+ Research-Grade Framework for Longitudinal Intent Trajectory Modeling*
 
-This project implements a research-oriented Retrieval-Augmented Generation (RAG) system that moves beyond stateless interactions by incorporating tiered memory (STM/LTM) and dynamic context evolution.
-
-## 🚀 Research Vision
-
-The core objective is to model the **Intent Trajectory** of a user. Instead of treating each query in isolation, the system maintains a **Dynamic Context Embedding (DCE)** that evolves with every interaction, allowing the generator to "recall" past preferences and "anticipate" future research directions.
-
-## 🏗️ Architecture
-
-- **Short-Term Memory (STM):** A high-fidelity sliding window of recent interactions (5 turns).
-- **Long-Term Memory (LTM):** Consolidated knowledge filtered via a decay function $W(t) = e^{-\lambda t}$.
-- **Context Evolution:** A weighted Exponential Moving Average (EMA) of query embeddings that shifts the system's "focus" based on semantic drift.
-- **Dual Retrieval:** Queries search across both a global knowledge base (External) and personal history (Internal).
-
-## 📊 Dataset Integration
-
-The system is integrated with the following research datasets via `kagglehub`:
-
-- **DailyDialog**: Used for modeling natural conversational flow and intent transitions.
-- **PersonaChat**: Used for testing the consistency of personalized memory over multi-session interactions.
-
-## 🏗️ Components
-
-- `backend/memory_engine.py`: Core logic for memory formation and DCE updating.
-- `backend/rag_pipeline.py`: Orchestrates dual-retrieval and grounding evidence.
-- `backend/data_loader.py`: Handles Kaggle dataset downloads and pre-processing.
-- `backend/main.py`: FastAPI server for communication and simulation.
-- `frontend/`: A premium, dark-mode research dashboard using vanilla CSS and JS.
-
-## 🏁 How to Run
-
-1. **Backend:**
-
-   ```bash
-   pip install -r requirements.txt
-   python backend/main.py
-   ```
-
-2. **Frontend:**
-   Open `frontend/index.html` in any modern browser.
-
-3. **Run Simulation:**
-   Visit `http://localhost:8000/research/simulation?limit=5` to trigger a research simulation using the DailyDialog dataset.
-
-## 🧪 Evaluation Metrics (Proposed)
-
-- **NDCG@k:** Accuracy of personalized retrieval vs. baseline RAG.
-- **Context Alignment Score:** Cosine similarity between response and latent intent trajectory.
-- **Hallucination Rate:** Measured by contradiction with LTM grounding.
+[![Python](https://img.shields.io/badge/Backend-FastAPI-green)](https://fastapi.tiangolo.com)
+[![Frontend](https://img.shields.io/badge/Interface-Glassmorphism-blue)](#)
+[![Datasets](https://img.shields.io/badge/Benchmarking-Kaggle-orange)](#)
+[![Metrics](https://img.shields.io/badge/Evaluation-NDCG%20%7C%20REI-red)](#)
 
 ---
-*Created as part of the Advanced Agentic Coding Research Proposal.*
+
+## 🔬 1. Project Abstract
+Traditional Retrieval-Augmented Generation (RAG) systems suffer from **Temporal Amnesia**—treating sequential user interactions as i.i.d. events. This project introduces **C-RAG**, a cognitively-inspired RAG architecture that implements **Disentangled Memory Tracks** (Episodic STM and Semantic LTM) to model **Longitudinal User Intent Trajectories**. By leveraging **Information Bottleneck Analysis (IBA)** for memory consolidation, the system optimizes for persona consistency and high-precision personalized retrieval.
+
+---
+
+## 🏛️ 2. Research Architecture & Methodology
+The system mirrors biological cognitive processes, moving beyond simple vector-store retrieval into a **Meta-Cognitive Reflexive Loop**.
+
+### 2.1 The Dual-Track Memory Engine
+- **Episodic Short-Term Memory (STM):** A high-fidelity, chronological buffer for recent interactions.
+- **Semantic Long-Term Memory (LTM):** An "Ultimate Axiom" registry. When the STM buffer reaches critical capacity, the system performs **Distillation**, extracting high-salience knowledge units and purging noise via the **Information Bottleneck (IBA)** ratio.
+
+### 2.2 Mathematical Foundations
+To prevent **Semantic Drift** and **Adversarial Noise**, the system calculates:
+- **Research Efficiency Index (REI):** Measures the alignment between internal memory confidence and external factual grounding.
+- **Compression Efficiency (IBA Ratio):** Measures the informational weight of consolidated axioms vs. raw interaction tokens.
+
+---
+
+## 🖼️ 3. Technical Illustrations (Live Workspace Capture)
+
+### 3.1 Ultimate Research Dashboard
+The **C-RAG Evolution Dashboard** featuring Vanguard Glass-CSS and real-time intent visualization.
+![Ultimate Research Interface](assets/dashboard_full.png)
+
+### 3.2 Cognitive Memory Evolution
+Visualization of the **STM-to-LTM** transition (Episodic to Semantic) and **IBA Compression** Efficiency.
+![Memory Evolution & Consolidation](assets/memory_evolution.png)
+
+### 3.3 Scientific Laboratory (AQE)
+Real-time **NDCG** and **Hallucination Probability** reports from a 10-trajectory DailyDialog simulation.
+![Scientific Evaluation Rigor](assets/benchmark_report.png)
+
+### 3.4 Autonomous Researcher Persona
+Expertise discovery and identity export based on longitudinal interaction history.
+![Semantic Identity Profiling](assets/persona_profile.png)
+
+---
+
+## 📊 4. Dataset Integration & Motivation
+The system is grounded in real-world conversational data to ensure empirical validity:
+
+1. **DailyDialog**: Used for modeling **Natural Intent Trajectories**.
+2. **PersonaChat**: Used for verifying **Semantic Identity Consistency** over long-context interactions.
+
+---
+
+## 🔥 5. Evaluation Methodology
+This project includes a dedicated **AQE (Automated Quantitative Evaluation)** Suite:
+
+| Metric | Scientific Importance | Description |
+| :--- | :--- | :--- |
+| **NDCG** | Retrieval Precision | Measures how effectively the system ranks internal history over noise. |
+| **Hallucination Index** | Factuality | Based on contradiction with Long-Term Memory grounding. |
+| **AMW Stability** | Adaptive Weighting | Adjusts retrieval math based on historical REI success. |
+
+---
+
+## 🏁 6. How to Run
+1. **Backend**: `python backend/main.py`.
+2. **Frontend**: Open `frontend/index.html`.
+3. **Simulation**: Click **"Run AQE Benchmark"** in the sidebar.
+
+---
+*Developed for Tier-1 Research Presentation & Advanced R&D Evaluation.*
