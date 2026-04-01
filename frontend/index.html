@@ -85,13 +85,20 @@
   </div>
 
   <script>
-    // Dynamic API Discovery & Deployment Configuration
-    const PRODUCTION_API_URL = "https://your-render-app-name.onrender.com"; // 👈 REPLACE THIS with your Render URL after deployment
+    // --- PRODUCTION SYSTEM SYNC ---
+    const PLACEHOLDER_URL = "https://your-render-app-name.onrender.com";
+    const STORED_URL = localStorage.getItem('ELITE_RAG_API_URL');
     
-    const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    // Auto-detect production vs local environment
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const API_BASE = isLocal 
         ? (window.location.port ? `${window.location.protocol}//${window.location.hostname}:${window.location.port}` : 'http://localhost:8000')
-        : PRODUCTION_API_URL;
+        : (STORED_URL || PLACEHOLDER_URL);
     
+    if (!isLocal && API_BASE === PLACEHOLDER_URL) {
+        console.warn("⚠️ RAG ENGINE NOTICE: PRODUCTION_API_URL is still a placeholder. Please set your Render URL using: localStorage.setItem('ELITE_RAG_API_URL', 'https://your-app.onrender.com') and refresh.");
+    }
+
     console.log(`Research Engine connecting to: ${API_BASE}`);
 
     const chatHistory = document.getElementById('chat-history');
