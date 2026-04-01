@@ -129,14 +129,14 @@ Implementing a privacy-preserved **Federated Memory Layer** where multiple C-RAG
 
 This framework is strategically architected for **Reproducible Research (R2)** and stands as a baseline for longitudinal memory studies. It is currently optimized for collaborative integration within:
 
-- **Premier CFTIs**: IITs, NITs, IISERs, and IISc R&D labs.
-- **MNC Research Divisions**: Pioneering agentic memory architectures (OpenAI, Google DeepMind, Meta FAIR).
+- **Global Research Context**: Optimized for large-scale integration within top-tier academic and industrial AI laboratories.
+- **MNC Research Divisions**: Pioneering agentic memory architectures in a decentralized, multi-user environment.
 
 ### Technical Contribution & Peer Review
 
-The **C-RAG** protocol establishes a novel benchmark for **Cognitive Context Evolution.** We invite researchers and institutional stakeholders to audit the **AMW (Adaptive Memory Weighting)** algorithms and contribute to the evolution of decentralized persistent memory layers.
+The **C-RAG** protocol establishes a novel benchmark for **Cognitive Context Evolution.** We invite the global research community and institutional stakeholders to audit the **AMW (Adaptive Memory Weighting)** algorithms and contribute to the evolution of persistent cognitive memory layers.
 
-**Primary Investigator**: Sappymukherjee214
+**Core Research Initiative**: Personalized Memory Architectures
 
 **Research Trajectory**: Agentic Cognitive Architectures | Information Bottleneck Distillation
 
