@@ -1,4 +1,5 @@
 # Personalized Memory-Aware RAG with Cognitive Context Evolution (C-RAG)
+
 ### *A Tier-1+ Research-Grade Framework for Longitudinal Intent Trajectory Modeling*
 
 [![Python](https://img.shields.io/badge/Backend-FastAPI-green)](https://fastapi.tiangolo.com)
@@ -17,11 +18,14 @@ Traditional Retrieval-Augmented Generation (RAG) systems suffer from **Temporal 
 The system mirrors biological cognitive processes, moving beyond simple vector-store retrieval into a **Meta-Cognitive Reflexive Loop**.
 
 ### 2.1 The Dual-Track Memory Engine
+
 - **Episodic Short-Term Memory (STM):** A high-fidelity, chronological buffer for recent interactions.
 - **Semantic Long-Term Memory (LTM):** An "Ultimate Axiom" registry. When the STM buffer reaches critical capacity, the system performs **Distillation**, extracting high-salience knowledge units and purging noise via the **Information Bottleneck (IBA)** ratio.
 
 ### 2.2 Mathematical Foundations
+
 To prevent **Semantic Drift** and **Adversarial Noise**, the system calculates:
+
 - **Research Efficiency Index (REI):** Measures the alignment between internal memory confidence and external factual grounding.
 - **Compression Efficiency (IBA Ratio):** Measures the informational weight of consolidated axioms vs. raw interaction tokens.
 
